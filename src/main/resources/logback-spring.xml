@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <http>
+            <url>http://${LOKI_URL:IP_VM2_PLACEHOLDER}:3100/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>app=${spring.application.name},host=${HOSTNAME}</pattern>
+            </label>
+            <message>
+                <pattern>%-5level [%thread] %logger{36} - %msg%n</pattern>
+            </message>
+        </format>
+    </appender>
+
+    <!-- OBLIGATOIRE : sans ce bloc zéro log dans Grafana -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOKI"/>
+    </root>
+
+</configuration>
