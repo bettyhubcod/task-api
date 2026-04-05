@@ -5,4 +5,4 @@ scrape_configs:
   - job_name: 'task-api'
     metrics_path: '/l3gl/actuator/prometheus'
     static_configs:
-      - targets: ['IP_VM1_PLACEHOLDER']
+      - targets: ['192.168.1.27']

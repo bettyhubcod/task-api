@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: task-api
-          image: IMAGE_PLACEHOLDER:latest
+          image: bettynd/task-api:latest
           ports:
             - containerPort: 8085
           envFrom:
