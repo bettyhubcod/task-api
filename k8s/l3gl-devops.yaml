@@ -9,7 +9,7 @@ data:
   DB_NAME: "task-core"
   DB_USER: "root"
   DB_PASSWORD: "root"
-  LOKI_URL: "IP_VM2_PLACEHOLDER"
+  LOKI_URL: "192.168.1.15"
 
 ---
 
