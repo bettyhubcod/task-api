@@ -4,12 +4,13 @@ metadata:
   name: task-api-config
   namespace: devops-l3gl
 data:
-  DB_HOST: "mysql-service"
+  DB_HOST: mysql-service
+  DB_NAME: task-core
+  DB_USER: root
+  DB_PASSWORD: root
   DB_PORT: "3306"
-  DB_NAME: "task-core"
-  DB_USER: "root"
-  DB_PASSWORD: "root"
-  LOKI_URL: "192.168.1.15"
+  LOKI_URL: http://192.168.1.15:3100  # IP de la VM2 avec Loki
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -27,34 +28,33 @@ spec:
         app: task-api
     spec:
       containers:
-        - name: task-api
-          image: bettynd/task-api:latest
-          ports:
-            - containerPort: 8085
-          envFrom:
-            - configMapRef:
-                name: task-api-config
-          resources:
-            requests:
-              cpu: "200m"
-              memory: "512Mi"
-            limits:
-              cpu: "400m"
-              memory: "1Gi"
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8085
-            initialDelaySeconds: 120
-            periodSeconds: 15
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8085
-            initialDelaySeconds: 180
-            periodSeconds: 20
-            failureThreshold: 5
+      - name: task-api
+        image: <VOTRE_IMAGE_DOCKER>
+        ports:
+        - containerPort: 8085
+        envFrom:
+        - configMapRef:
+            name: task-api-config
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8085
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8085
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "200m"
+          limits:
+            memory: "500Mi"
+            cpu: "400m"
+
 ---
 apiVersion: v1
 kind: Service
@@ -68,6 +68,7 @@ spec:
     - port: 8085
       targetPort: 8085
   type: ClusterIP
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -75,16 +76,15 @@ metadata:
   name: task-api-ingress
   namespace: devops-l3gl
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
   rules:
-    - http:
-        paths:
-          - path: /l3gl
-            pathType: Prefix
-            backend:
-              service:
-                name: task-api-service
-                port:
-                  number: 8085
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: task-api-service
+            port:
+              number: 8085

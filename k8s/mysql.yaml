@@ -5,10 +5,9 @@ metadata:
   namespace: devops-l3gl
 type: Opaque
 data:
-  mysql-root-password: cm9vdA==
+  MYSQL_ROOT_PASSWORD: cm9vdA==  # 'root' encodé en base64
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,21 +24,25 @@ spec:
         app: mysql
     spec:
       containers:
-        - name: mysql
-          image: mysql:8
-          ports:
-            - containerPort: 3306
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-root-password
-            - name: MYSQL_DATABASE
-              value: "task-core"
+      - name: mysql
+        image: mysql:8.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+        ports:
+        - containerPort: 3306
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "200m"
+          limits:
+            memory: "500Mi"
+            cpu: "400m"
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
