@@ -32,6 +32,8 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_DATABASE  
+          value: task-core      
         ports:
         - containerPort: 3306
         resources:
