@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+    <!-- <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
         <http>
             <url>https://subcompensational-mechanically-eduardo.ngrok-free.app/loki/api/v1/push</url>
         </http>
@@ -19,12 +19,12 @@
                 <pattern>%-5level [%thread] %logger{36} - %msg%n</pattern>
             </message>
         </format>
-    </appender>
+    </appender> -->
 
     <!-- OBLIGATOIRE : sans ce bloc zéro log dans Grafana -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="LOKI"/>
+        
     </root>
 
 </configuration>
