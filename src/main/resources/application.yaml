@@ -15,10 +15,12 @@ spring:
     show-sql: true
 
 management:
+  server:
+    port: 8085
   endpoints:
     web:
       exposure:
-        include: health,info,prometheus,metrics
+        include: health,info,metrics,prometheus
   endpoint:
     prometheus:
       enabled: true
