@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: task-api
-        image: <VOTRE_IMAGE_DOCKER>
+        image: bettynd/task-api:latest
         ports:
         - containerPort: 8085
         envFrom:
