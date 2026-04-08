@@ -1,2 +1,5 @@
-C:\Users\User\Desktop\task-api_gitHub\src\main\java\sn\isi\l3gl\api\task_api\controller\TaskController.java
-C:\Users\User\Desktop\task-api_gitHub\src\main\java\sn\isi\l3gl\api\task_api\TaskApiApplication.java
+C:\Users\User\Desktop\task-api\src\main\java\sn\isi\l3gl\api\task_api\controller\TaskController.java
+C:\Users\User\Desktop\task-api\src\main\java\sn\isi\l3gl\api\task_api\TaskApiApplication.java
+C:\Users\User\Desktop\task-api\src\main\java\sn\isi\l3gl\core\task_core\entite\Task.java
+C:\Users\User\Desktop\task-api\src\main\java\sn\isi\l3gl\core\task_core\repository\TaskRepository.java
+C:\Users\User\Desktop\task-api\src\main\java\sn\isi\l3gl\core\task_core\service\TaskService.java

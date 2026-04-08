@@ -1,2 +1,5 @@
-sn\isi\l3gl\api\task_api\controller\TaskController.class
 sn\isi\l3gl\api\task_api\TaskApiApplication.class
+sn\isi\l3gl\core\task_core\service\TaskService.class
+sn\isi\l3gl\api\task_api\controller\TaskController.class
+sn\isi\l3gl\core\task_core\entite\Task.class
+sn\isi\l3gl\core\task_core\repository\TaskRepository.class
