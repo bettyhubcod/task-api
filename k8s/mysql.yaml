@@ -4,8 +4,8 @@ metadata:
   name: mysql-secret
   namespace: devops-l3gl
 type: Opaque
-stringData:
-  MYSQL_ROOT_PASSWORD: root
+data:
+  MYSQL_ROOT_PASSWORD: cm9vdA==   # "root" en base64
 
 ---
 apiVersion: apps/v1
