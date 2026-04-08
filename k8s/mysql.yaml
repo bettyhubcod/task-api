@@ -4,9 +4,8 @@ metadata:
   name: mysql-secret
   namespace: devops-l3gl
 type: Opaque
-data:
-  MYSQL_ROOT_PASSWORD: cm9vdA==
-  MYSQL_DATABASE: dGFzay1jb3Jl
+stringData:
+  MYSQL_ROOT_PASSWORD: root
 
 ---
 apiVersion: apps/v1
@@ -34,10 +33,7 @@ spec:
               name: mysql-secret
               key: MYSQL_ROOT_PASSWORD
         - name: MYSQL_DATABASE
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: MYSQL_DATABASE
+          value: task-core
         ports:
         - containerPort: 3306
         resources:
